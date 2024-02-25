@@ -60,7 +60,7 @@ export const allProductsController = async (req, res) => {
       .find({})
       .populate("category")
       .select("-image")
-      .limit(8)
+      .limit(28)
       .sort({ createdAt: -1 });
     res.status(200).send({
       success: true,
