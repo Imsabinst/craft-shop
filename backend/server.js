@@ -5,6 +5,7 @@ import morgan from "morgan";
 import connectDB from "./src/config/db.js";
 import cors from "cors";
 import productRoutes from "./src/routes/productRoutes.js";
+import userRoutes from "./src/routes/userRoutes.js";
 
 //config dotenv
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/user", userRoutes);
 
 //rest api
 app.get("/", (req, res) => {
