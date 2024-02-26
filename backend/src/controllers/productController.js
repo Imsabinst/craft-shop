@@ -65,7 +65,7 @@ export const allProductsController = async (req, res) => {
     res.status(200).send({
       success: true,
       totalProductsCount: products.length,
-      message: "Success products",
+      message: "Successfully products are listed",
       products,
     });
   } catch (error) {
@@ -81,7 +81,7 @@ export const allProductsController = async (req, res) => {
 export const singleProductController = async (req, res) => {
   try {
     const product = await productModel
-      .findOne({ id: req.params._id })
+      .findOne({ _id: req.params._id })
       .select("-image")
       .populate("category");
     res.status(200).send({
@@ -131,6 +131,40 @@ export const deleteProductController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Could not delete the product!",
+      error: error.message,
+    });
+  }
+};
+export const newCollectionProductsController = async (req, res) => {
+  try {
+    const products = await productModel.find({}).select("-image");
+    const newCollection = products.slice(1).slice(-8);
+    res.status(200).send({
+      success: true,
+      message: "New collection are successfully listed",
+      newCollection,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Could not load the products!",
+      error: error.message,
+    });
+  }
+};
+export const relatedProductsController = async (req, res) => {
+  try {
+    const products = await productModel.find({}).select("-image");
+    const newCollection = products.slice(1).slice(-8);
+    res.status(200).send({
+      success: true,
+      message: "New collection are successfully listed",
+      newCollection,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Could not load the products!",
       error: error.message,
     });
   }

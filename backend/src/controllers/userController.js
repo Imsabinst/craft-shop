@@ -87,14 +87,13 @@ export const loginController = async (req, res) => {
       success: true,
       message: "Login Successful",
       user: {
-        _id: user._id,
+        id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
       },
       token,
     });
-    console.log(user.role, "ddd");
   } catch (error) {
     console.log(error);
     req.status(500).send({
