@@ -19,11 +19,10 @@ const ShopContextProvider = (props) => {
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5001/api/v1/product/getProducts"
+        `${process.env.REACT_APP_API}/api/v1/product/getProducts`
       );
       if (data?.success) {
         setAllProduct(data?.products);
-        console.log(data?.products);
       }
     } catch (error) {
       console.log(error);

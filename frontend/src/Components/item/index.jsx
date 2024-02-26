@@ -7,7 +7,7 @@ const Item = ({ item }) => {
     <div className="item">
       <Link to={`/product/${item?._id}`}>
         <img
-          src={`http://localhost:5001/api/v1/product/productImage/${item?._id}`}
+          src={`${process.env.REACT_APP_API}/api/v1/product/productImage/${item?._id}`}
           alt={item?.name}
         />
       </Link>
