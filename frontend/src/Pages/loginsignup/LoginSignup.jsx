@@ -27,7 +27,7 @@ const LoginSignup = () => {
   const userLogin = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:5001/api/v1/user/login`,
+        `${process.env.REACT_APP_API}/api/v1/user/login`,
         formData
       );
       if (res && res.data.success) {
@@ -48,13 +48,10 @@ const LoginSignup = () => {
   const userRegistration = async () => {
     try {
       const responseData = await axios.post(
-        `http://localhost:5001/api/v1/user/register`,
-        formData
-      );
-      /*   const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/user/register`,
         formData
-      ); */
+      );
+
       console.log(responseData);
       if (responseData?.success) {
         console.log("first");

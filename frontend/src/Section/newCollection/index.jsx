@@ -1,24 +1,41 @@
-import React from "react";
-import new_collections from "../../Assets/new_collections";
+import React, { useEffect, useState } from "react";
 import Item from "../../Components/item";
+import axios from "axios";
 
 import "./newCollection.css";
 
 const NewCollection = () => {
+  const [newCollection, setNewCollection] = useState([]);
+
+  useEffect(() => {
+    const getNewCollection = async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/getNewCollection`
+      );
+
+      if (data?.success) {
+        setNewCollection(data.newCollection);
+      }
+    };
+    getNewCollection();
+  }, []);
+
   return (
     <div className="newCollection">
       <h1>NEW COLLECTIONS</h1>
       <hr />
       <div className="collections">
-        {new_collections.map((item) => (
-          <Item
-            key={item.id}
-            name={item.name}
+        {newCollection &&
+          newCollection.map((item) => (
+            <Item
+              key={item.id}
+              /* name={item.name}
             image={item.image}
             new_price={item.new_price}
-            old_price={item.old_price}
-          />
-        ))}
+            old_price={item.old_price} */
+              item={item}
+            />
+          ))}
       </div>
     </div>
   );
