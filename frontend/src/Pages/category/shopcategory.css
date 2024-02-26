@@ -1,3 +1,6 @@
+.shopcategory {
+  background: red;
+}
 .shopcategory-banner {
   display: block;
   margin: 30px auto;
@@ -21,11 +24,14 @@
 }
 
 .shopcategory-products {
+  width: auto;
   margin: 20px 170px;
   display: grid;
+  align-items: center;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 80px;
+  gap: 20px;
 }
+
 .shopcategory-loadmore {
   display: flex;
   justify-content: center;
@@ -64,6 +70,7 @@
     width: 90%;
     margin: 10px auto;
     row-gap: 40px;
+    overflow-x: hidden;
   }
 
   .shopcategory-loadmore {
