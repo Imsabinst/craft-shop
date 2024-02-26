@@ -5,14 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ShopContextProvider from "./Context/ShopContext";
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./Context/auth";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ShopContextProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ShopContextProvider>
+  <AuthProvider>
+    <ShopContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ShopContextProvider>
+  </AuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

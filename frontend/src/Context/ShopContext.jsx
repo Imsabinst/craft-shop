@@ -1,20 +1,38 @@
 import React, { createContext, useState } from "react";
-
-import all_product from "../Assets/all_product";
+import { useEffect } from "react";
+import axios from "axios";
 
 export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
   let cart = {};
-  for (let index = 0; index < all_product.length + 1; index++) {
+  for (let index = 0; index < 300 + 1; index++) {
     cart[index] = 0;
   }
   return cart;
 };
 
 const ShopContextProvider = (props) => {
+  const [allProduct, setAllProduct] = useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
 
+  const getProducts = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5001/api/v1/product/getProducts"
+      );
+      if (data?.success) {
+        setAllProduct(data?.products);
+        console.log(data?.products);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
   const addToCart = (itemId) => {
     setCartItems((prevValue) => ({
       ...prevValue,
@@ -31,7 +49,7 @@ const ShopContextProvider = (props) => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = all_product.find(
+        let itemInfo = allProduct.find(
           (product) => product.id === Number(item)
         );
         totalAmount += itemInfo.new_price * cartItems[item];
@@ -51,7 +69,7 @@ const ShopContextProvider = (props) => {
   };
 
   const conextValue = {
-    all_product,
+    allProduct,
     cartItems,
     addToCart,
     removeCartItems,
