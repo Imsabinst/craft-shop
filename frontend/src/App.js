@@ -1,5 +1,3 @@
-import "./App.css";
-
 import { Routes, Route } from "react-router-dom";
 import Shop from "./Pages/Shop";
 import ShopCategory from "./Pages/category/ShopCategory";
@@ -8,8 +6,6 @@ import Cart from "./Pages/Cart";
 import LoginSignup from "./Pages/loginsignup/LoginSignup";
 import Navbar from "./Components/navbar";
 import Footer from "./Section/footer";
-import men_banner from "./Assets/banner_men.png";
-import women_banner from "./Assets/banner_women.png";
 
 function App() {
   return (
