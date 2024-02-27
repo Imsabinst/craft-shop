@@ -26,16 +26,7 @@ const NewCollection = () => {
       <hr />
       <div className="collections">
         {newCollection &&
-          newCollection.map((item) => (
-            <Item
-              key={item.id}
-              /* name={item.name}
-            image={item.image}
-            new_price={item.new_price}
-            old_price={item.old_price} */
-              item={item}
-            />
-          ))}
+          newCollection.map((item) => <Item key={item._id} item={item} />)}
       </div>
     </div>
   );

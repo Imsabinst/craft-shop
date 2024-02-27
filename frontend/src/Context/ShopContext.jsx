@@ -32,12 +32,52 @@ const ShopContextProvider = (props) => {
   useEffect(() => {
     getProducts();
   }, []);
+
   const addToCart = (itemId) => {
     setCartItems((prevValue) => ({
       ...prevValue,
       [itemId]: prevValue[itemId] + 1,
     }));
+    if (localStorage.getItem("auth-token")) {
+      fetch(`${process.env.REACT_APP_API}/api/v1/product/addToCart`, {
+        method: "POST",
+        headers: {
+          Accept: "application/form-data",
+          "auth-token": `${localStorage.getItem("auth-token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ itemId: itemId }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data, "d......."));
+    }
   };
+
+  useEffect(() => {
+    addToCart();
+  }, []);
+  /* const addToCart = (itemId) => {
+    setCartItems((prevValue) => ({
+      ...prevValue,
+      [itemId]: prevValue[itemId] + 1,
+    }));
+    if (localStorage.getItem("auth-token")) {
+      axios
+        .post(
+          `${process.env.REACT_APP_API}/api/v1/product/addToCart`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              token: `${localStorage.getItem("auth-token")}`,
+            },
+          },
+          { itemId: itemId }
+        )
+        .then((response) => response.data)
+        .then((res) => console.log(res, "d......."));
+    }
+  }; */
+
   const removeCartItems = (itemId) => {
     setCartItems((prevValue) => ({
       ...prevValue,
@@ -51,7 +91,7 @@ const ShopContextProvider = (props) => {
         let itemInfo = allProduct.find(
           (product) => product.id === Number(item)
         );
-        totalAmount += itemInfo.new_price * cartItems[item];
+        totalAmount += itemInfo?.new_price * cartItems[item];
         console.log(totalAmount);
       }
     }
@@ -63,6 +103,7 @@ const ShopContextProvider = (props) => {
       if (cartItems[item] > 0) {
         totalItem += cartItems[item];
       }
+      console.log(totalItem);
     }
     return totalItem;
   };

@@ -95,10 +95,11 @@ const Navbar = () => {
             <button>Login</button>
           </Link>
         )}
-
         <Link to="/cart" style={{ textDecoration: "none" }}>
           <img src={cart_icon} alt="cart icon" />
         </Link>
+        {/*      <div className="nav-cart-count">{getTotalCartItems()}</div>
+         */}
         <div className="nav-cart-count">{getTotalCartItems()}</div>
       </div>
     </div>

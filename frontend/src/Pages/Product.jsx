@@ -10,7 +10,8 @@ const Product = () => {
   const { allProduct } = useContext(ShopContext);
   const { productId } = useParams();
 
-  const product = allProduct.find((e) => e.id === Number(productId));
+  const product = allProduct.find((e) => e._id === productId);
+
   return (
     <div>
       <Breadcrum product={product} />

@@ -8,7 +8,7 @@ import { ShopContext } from "../../Context/ShopContext";
 
 const ProductDisplay = (props) => {
   const { product } = props;
-
+  console.log(product, "ggg");
   const { addToCart } = useContext(ShopContext);
 
   return (
@@ -21,11 +21,13 @@ const ProductDisplay = (props) => {
           <img src={product?.image} alt="" />
         </div>
         <div className="productDisplay-img">
-          <img
-            src={product?.image}
-            alt=""
-            className="productDisplay-main-img"
-          />
+          {product && (
+            <img
+              src={product?.image}
+              alt=""
+              className="productDisplay-main-img"
+            />
+          )}
         </div>
       </div>
       <div className="productDisplay-right">
@@ -69,6 +71,13 @@ const ProductDisplay = (props) => {
         >
           ADD TO CART
         </button>
+        {/* <button
+          onClick={() => {
+            addToCart(product?._id);
+          }}
+        >
+          ADD TO CART
+        </button> */}
         <p className="productDisplay-right-category">
           <span>Category: </span>Women, T-Shirt, Crop Top
         </p>

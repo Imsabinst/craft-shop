@@ -1,6 +1,6 @@
 .hero {
   height: 100vh;
-  background: rgb(244, 174, 130);
+  background: linear-gradient(180deg, #f09278 0%, #e1ffea22 60%);
   display: flex;
 }
 
@@ -132,7 +132,7 @@
     font-size: 13px;
   }
   .hero-right img {
-    width: 300px;
+    width: 200px;
   }
 }
 @media (max-width: 500px) {
@@ -150,6 +150,9 @@
   }
   .hero-hand-icon img {
     width: 55px;
+  }
+  .hero-right img {
+    width: 100px;
   }
   .hero-latest-btn {
     width: 200px;

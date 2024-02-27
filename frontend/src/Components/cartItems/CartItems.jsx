@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 
 import remove_icon from "../../Assets/cart_cross_icon.png";
-import "./cartItems.css";
 
 import { ShopContext } from "../../Context/ShopContext";
+import "./cartItems.css";
 
 const CartItems = () => {
-  const { getTotalCartAmount, all_product, cartItems, removeCartItems } =
+  const { getTotalCartAmount, allProduct, cartItems, removeCartItems } =
     useContext(ShopContext);
 
   return (
@@ -20,33 +20,34 @@ const CartItems = () => {
         <p>Remove</p>
       </div>
       <hr />
-      {all_product.map((e) => {
-        if (cartItems[e.id] > 0) {
-          return (
-            <div key={e.id}>
-              <div className="cartItems-format cartItems-format-main">
-                <img src={e.image} alt="" className="cartIcon-product-icon" />
-                <p>{e.name}</p>
-                <p>€{e.new_price}</p>
-                <button className="cartItems-quantity">
-                  {cartItems[e.id]}
-                </button>
-                <p>€{e.new_price * cartItems[e.id]}</p>
-                <img
-                  className="cartItems-remove-icon"
-                  src={remove_icon}
-                  alt=""
-                  onClick={() => {
-                    removeCartItems(e.id);
-                  }}
-                />
+      {allProduct &&
+        allProduct.map((e) => {
+          if (cartItems[e?.id] > 0) {
+            return (
+              <div key={e._id}>
+                <div className="cartItems-format cartItems-format-main">
+                  <img src={e.image} alt="" className="cartIcon-product-icon" />
+                  <p>{e.name}</p>
+                  <p>€{e.new_price}</p>
+                  <button className="cartItems-quantity">
+                    {cartItems[e.id]}
+                  </button>
+                  <p>€{e.new_price * cartItems[e.id]}</p>
+                  <img
+                    className="cartItems-remove-icon"
+                    src={remove_icon}
+                    alt=""
+                    onClick={() => {
+                      removeCartItems(e.id);
+                    }}
+                  />
+                </div>
+                <hr />
               </div>
-              <hr />
-            </div>
-          );
-        }
-        return null;
-      })}
+            );
+          }
+          return null;
+        })}
       <div className="cartItems-down">
         <div className="cartItems-total">
           <h1>Cart Totals</h1>
