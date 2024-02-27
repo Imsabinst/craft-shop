@@ -5,7 +5,6 @@ import data_product from "../../Assets/data";
 import Item from "../../Components/item";
 
 const RelatedProducts = () => {
-  console.log(data_product, "ddd");
   return (
     <div className="relatedProducts">
       <h1>Related Procts</h1> <hr />

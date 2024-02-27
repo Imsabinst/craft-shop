@@ -7,28 +7,44 @@ import "./addproduct.css";
 import { useState } from "react";
 
 const AddProduct = () => {
-  const [image, setImage] = useState("");
-  const [category, setCategory] = useState("");
-  const [name, setName] = useState("");
-  const [newPrice, setNewPrice] = useState("");
-  const [oldPrice, setOldPrice] = useState("");
+  const [image, setImage] = useState(false);
 
-  const createProduct = async (e) => {
-    e.preventDefault();
+  const [productDetail, setProductDetail] = useState({
+    name: "",
+    image: "",
+    category: "",
+    new_price: "",
+    old_price: "",
+  });
+
+  const handleImage = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const changeHandler = (e) => {
+    setProductDetail({ ...productDetail, [e.target.name]: e.target.value });
+  };
+
+  const addProduct = async () => {
+    const product = productDetail;
+    const formData = new FormData();
+    formData.append("product", image);
+
     try {
-      const productData = new FormData();
-      productData.append("name", name);
-      productData.append("image", image);
-      productData.append("new_price", newPrice);
-      productData.append("old_price", oldPrice);
-      productData.append("category", category);
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/product/addProduct`,
-        productData
+        `${process.env.REACT_APP_API}/api/v1/product/uploadImage`,
+        formData
       );
-
-      if (data?.success) {
-        alert("success");
+      if (data.success) {
+        product.image = data?.image_url;
+        await axios
+          .post(
+            `${process.env.REACT_APP_API}/api/v1/product/addProduct`,
+            product
+          )
+          .then((product_data) =>
+            product_data.success ? alert("Error") : alert("Success")
+          );
       }
     } catch (error) {
       console.log(error);
@@ -41,8 +57,8 @@ const AddProduct = () => {
         <p>Product Title</p>
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={productDetail.name}
+          onChange={changeHandler}
           name="name"
           placeholder="enter product name"
         />
@@ -52,8 +68,8 @@ const AddProduct = () => {
           <p>Price</p>
           <input
             type="text"
-            value={oldPrice}
-            onChange={(e) => setOldPrice(e.target.value)}
+            value={productDetail.old_price}
+            onChange={changeHandler}
             name="old_price"
             placeholder="Enter old price"
           />
@@ -62,8 +78,8 @@ const AddProduct = () => {
           <p>Offer Price</p>
           <input
             type="text"
-            value={newPrice}
-            onChange={(e) => setNewPrice(e.target.value)}
+            value={productDetail.new_price}
+            onChange={changeHandler}
             name="new_price"
             placeholder="Enter new price"
           />
@@ -73,8 +89,8 @@ const AddProduct = () => {
         <p>Product Category</p>
         <select
           name="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={productDetail.category}
+          onChange={changeHandler}
           className="addproduct-selector"
         >
           <option defaultValue="">Please Select a category</option>
@@ -95,7 +111,7 @@ const AddProduct = () => {
           />
         </label>
         <input
-          onChange={(e) => setImage(e.target.files[0])}
+          onChange={handleImage}
           type="file"
           name="image"
           accept="image/*"
@@ -103,7 +119,13 @@ const AddProduct = () => {
           hidden
         />
       </div>
-      <button onClick={createProduct}>Add Product</button>
+      <button
+        onClick={() => {
+          addProduct();
+        }}
+      >
+        Add Product
+      </button>
     </div>
   );
 };

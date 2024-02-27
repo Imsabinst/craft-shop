@@ -1,7 +1,6 @@
 import React from "react";
-import hand_icon from "../../Assets/hand_icon.png";
 import arrow_icon from "../../Assets/arrow.png";
-import hero_icon from "../../Assets/hero_image.png";
+import hero_icon from "../../Assets/images/khaijadi.png";
 
 import "./hero.css";
 
@@ -9,14 +8,13 @@ const Hero = () => {
   return (
     <div className="hero">
       <div className="hero-left">
-        <h2>NEW ARRIVALS ONLY</h2>
+        <h2>BEST COLLECTION</h2>
         <div>
+          <span>of</span>
           <div className="hero-hand-icon">
-            <p>new</p>
-            <img src={hand_icon} alt="hand icon" />
+            <p>Arts and Crafts</p>
           </div>
-          <p>collections</p>
-          <p>for everyone</p>
+          <p></p>
         </div>
         <div className="hero-latest-btn">
           <div>Latest Collection</div>

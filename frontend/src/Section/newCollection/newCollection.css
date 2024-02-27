@@ -61,9 +61,9 @@
     width: 120px;
   }
   .collections {
-    gap: 5px;
+    gap: 25px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 @media (max-width: 500px) {

@@ -25,8 +25,7 @@ const ShopCategory = (props) => {
         {allProduct &&
           allProduct?.map((item) => {
             if (props.category === item.category) {
-              console.log(item);
-              return <Item key={item._id} id={item._id} item={item} />;
+              return <Item key={item._id} item={item} />;
             } else {
               return null;
             }

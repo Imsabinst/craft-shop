@@ -43,7 +43,7 @@ const ListProduct = () => {
   return (
     <div className="list-product">
       <ProductListTable
-        products={products}
+        product={products}
         cross_icon={cross_icon}
         handleDelete={handleDelete}
       />

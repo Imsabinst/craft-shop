@@ -60,8 +60,8 @@
 }
 @media (max-width: 800px) {
   .popular {
-    height: 80vh;
-    gap: 6px;
+    height: 90vh;
+    gap: 10px;
   }
   .popular h1 {
     font-size: 20px;

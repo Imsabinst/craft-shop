@@ -3,19 +3,22 @@ import formidable from "express-formidable";
 
 import {
   addProductController,
+  addToCartController,
   allProductsController,
   deleteProductController,
   newCollectionProductsController,
-  productImageController,
+  popularProductsController,
+  relatedProductsController,
 } from "../controllers/productController.js";
 
 const router = express.Router();
 
-router.post("/addProduct", formidable(), addProductController);
+router.post("/addProduct", addProductController);
 router.get("/getProducts", allProductsController);
 router.delete("/deleteProduct/:pid", deleteProductController);
-router.get("/productImage/:pid", productImageController);
 router.get("/getNewCollection", newCollectionProductsController);
-router.get("/getRelatedProducts", newCollectionProductsController);
+router.get("/getPopularProducts", popularProductsController);
+router.get("/getRelatedProducts", relatedProductsController);
+router.post("/addToCart", addToCartController);
 
 export default router;

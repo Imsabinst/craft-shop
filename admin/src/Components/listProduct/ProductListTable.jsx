@@ -4,7 +4,8 @@ import cross_icon from "../../assets/cross_icon.png";
 
 import "./productListTable.css";
 
-const ProductListTable = ({ products, handleDelete }) => {
+const ProductListTable = ({ product, handleDelete }) => {
+  console.log(product);
   return (
     <>
       <div className="table-container">
@@ -19,11 +20,11 @@ const ProductListTable = ({ products, handleDelete }) => {
             </tr>
           </thead>
           <tbody>
-            {products.map((item) => (
-              <tr key={item._id}>
+            {product.map((item) => (
+              <tr key={item.id}>
                 <td>
                   <img
-                    src={`${process.env.REACT_APP_API}/api/v1/product/productImage/${item._id}`}
+                    src={item.image}
                     alt=""
                     className="listproduct-product-image"
                   />
@@ -32,11 +33,7 @@ const ProductListTable = ({ products, handleDelete }) => {
                 <td>{item.old_price}</td>
                 <td>{item.new_price}</td>
                 <td>
-                  <button
-                    colorScheme="red"
-                    mr={3}
-                    onClick={() => handleDelete(item._id)}
-                  >
+                  <button mr={3} onClick={() => handleDelete(item._id)}>
                     <img
                       src={cross_icon}
                       alt=""

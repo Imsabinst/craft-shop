@@ -1,51 +1,33 @@
 import productModel from "../models/productModel.js";
-import fs from "fs";
 
 export const addProductController = async (req, res) => {
   try {
-    const { name, category, new_price, old_price } = req.fields;
-    const { image } = req.files;
-
-    switch (true) {
-      case !name:
-        return res.status(500).send({
-          error: "Name is required!",
-        });
-      case !new_price:
-        return res.status(500).send({
-          error: "New price is required!",
-        });
-      case !old_price:
-        return res.status(500).send({
-          error: "Old price is required!",
-        });
-      case !category:
-        return res.status(500).send({
-          error: "Category is required!",
-        });
-
-      case image && image.size >= 1000000:
-        return res.status(500).send({
-          error: "Image is required! and less than 1 mb",
-        });
+    let products = await productModel.find({});
+    let id;
+    if (products.length > 0) {
+      let last_item_array = products.slice(-1); //only get the last product
+      let last_item = last_item_array[0]; //can access with index 0
+      id = last_item.id + 1;
+    } else {
+      id = 1;
     }
-    const products = new productModel({
-      ...req.fields,
+    const product = new productModel({
+      id,
+      name: req.body.name,
+      image: req.body.image,
+      category: req.body.category,
+      new_price: req.body.new_price,
+      old_price: req.body.old_price,
     });
 
-    if (image) {
-      products.image.data = fs.readFileSync(image.path);
-      products.image.contentType = image.type;
-    }
-
-    await products.save();
-    res.status(200).send({
+    await product.save();
+    console.log(product);
+    res.json({
       success: true,
       message: "Product created",
-      products,
+      product,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       message: "Error creating product",
@@ -58,8 +40,6 @@ export const allProductsController = async (req, res) => {
   try {
     const products = await productModel
       .find({})
-      .populate("category")
-      .select("-image")
       .limit(28)
       .sort({ createdAt: -1 });
     res.status(200).send({
@@ -82,8 +62,7 @@ export const singleProductController = async (req, res) => {
   try {
     const product = await productModel
       .findOne({ _id: req.params._id })
-      .select("-image")
-      .populate("category");
+      .select("-image");
     res.status(200).send({
       success: true,
       message: "Single product fetched",
@@ -94,25 +73,6 @@ export const singleProductController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Error",
-      error,
-    });
-  }
-};
-
-export const productImageController = async (req, res) => {
-  try {
-    const productImage = await productModel
-      .findById(req.params.pid)
-      .select("image");
-    if (productImage.image.data) {
-      res.set("Content-type", productImage.image.contentType);
-      return res.status(200).send(productImage.image.data);
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      message: "error",
       error,
     });
   }
@@ -137,7 +97,7 @@ export const deleteProductController = async (req, res) => {
 };
 export const newCollectionProductsController = async (req, res) => {
   try {
-    const products = await productModel.find({}).select("-image");
+    const products = await productModel.find({});
     const newCollection = products.slice(1).slice(-8);
     res.status(200).send({
       success: true,
@@ -152,14 +112,14 @@ export const newCollectionProductsController = async (req, res) => {
     });
   }
 };
-export const relatedProductsController = async (req, res) => {
+export const popularProductsController = async (req, res) => {
   try {
-    const products = await productModel.find({}).select("-image");
-    const newCollection = products.slice(1).slice(-8);
+    const products = await productModel.find({});
+    const popularProducts = products.slice(0, 4);
     res.status(200).send({
       success: true,
-      message: "New collection are successfully listed",
-      newCollection,
+      message: "Popular collection are successfully listed",
+      popularProducts,
     });
   } catch (error) {
     res.status(500).send({
@@ -168,4 +128,25 @@ export const relatedProductsController = async (req, res) => {
       error: error.message,
     });
   }
+};
+export const relatedProductsController = async (req, res) => {
+  try {
+    const products = await productModel.find({});
+    const relatedProducts = products.slice(1).slice(-8);
+    res.status(200).send({
+      success: true,
+      message: "Related Products are successfully listed",
+      relatedProducts,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Could not load the products!",
+      error: error.message,
+    });
+  }
+};
+
+export const addToCartController = async (req, res) => {
+  console.log(req.body);
 };

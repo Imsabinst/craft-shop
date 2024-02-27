@@ -5,13 +5,15 @@ import "./item.css";
 const Item = ({ item }) => {
   return (
     <div className="item">
-      <Link to={`/product/${item?._id}`}>
-        <img
-          src={`${process.env.REACT_APP_API}/api/v1/product/productImage/${item?._id}`}
-          alt={item?.name}
-        />
-      </Link>
-
+      {item && (
+        <Link to={`/product/${item?._id}`}>
+          <img
+            src={item?.image}
+            alt={item?.name}
+            onClick={window.scrollTo(0, 0)}
+          />
+        </Link>
+      )}
       <p>{item?.name}</p>
       <div className="item-prices">
         <div className="item-price-new">€{item?.new_price}</div>
