@@ -1,4 +1,6 @@
 import productModel from "../models/productModel.js";
+import userModel from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
 export const addProductController = async (req, res) => {
   try {
@@ -132,7 +134,7 @@ export const popularProductsController = async (req, res) => {
 export const relatedProductsController = async (req, res) => {
   try {
     const products = await productModel.find({});
-    const relatedProducts = products.slice(1).slice(-8);
+    const relatedProducts = products.slice(1, 4);
     res.status(200).send({
       success: true,
       message: "Related Products are successfully listed",
@@ -148,5 +150,49 @@ export const relatedProductsController = async (req, res) => {
 };
 
 export const addToCartController = async (req, res) => {
-  console.log(req.body);
+  try {
+    console.log("added", req.body.itemId);
+
+    console.log(req.body, req.userId);
+    let userData = await userModel.findOne({ _id: req.userId });
+    userData.cartData[req.body.itemId] += 1;
+    const final_Data = await userModel.findOneAndUpdate(
+      { _id: req.userId },
+      { cartData: userData.cartData }
+    );
+    res.status(200).send({ message: "Added", final_Data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeCartData = async (req, res) => {
+  try {
+    console.log("removed", req.body.itemId);
+    let userData = await userModel.findOne({ _id: req.userId });
+    if (userData.cartData[req.body.itemId] > 0) {
+      userData.cartData[req.body.itemId] -= 1;
+      await userModel.findOneAndUpdate(
+        { _id: req.userId },
+        { cartData: userData.cartData }
+      );
+      res.status(200).send({ message: "Removed" });
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+export const getCartData = async (req, res) => {
+  try {
+    console.log("getCart");
+    let userData = await userModel.findOne({ _id: req.userId });
+    /* res.send(200).send({
+      success: true,
+      message: "cart data",
+      userData,
+    }); */
+    res.json(userData.cartData);
+  } catch (err) {
+    throw err;
+  }
 };

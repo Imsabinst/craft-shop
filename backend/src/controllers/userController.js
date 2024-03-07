@@ -1,6 +1,6 @@
 import userModel from "../models/userModel.js";
 import { comparePassword, hashPassword } from "../helpers/authHelper.js";
-import JWT from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 export const registerController = async (req, res) => {
   try {
@@ -40,6 +40,7 @@ export const registerController = async (req, res) => {
       cartData: cart,
     }).save();
 
+    console.log(user, "eee");
     res.status(201).send({
       success: true,
       message: "User Registration Success.",
@@ -80,7 +81,7 @@ export const loginController = async (req, res) => {
       });
     }
     //token
-    const token = JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
     res.status(200).send({
@@ -91,9 +92,11 @@ export const loginController = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        cartData: user.cartData,
       },
       token,
     });
+    //console.log(user, token, "login");
   } catch (error) {
     console.log(error);
     req.status(500).send({

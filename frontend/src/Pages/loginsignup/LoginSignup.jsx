@@ -26,17 +26,17 @@ const LoginSignup = () => {
 
   const userLogin = async () => {
     try {
-      const res = await axios.post(
+      const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/user/login`,
         formData
       );
-      if (res && res.data.success) {
+      if (data.success) {
         setAuth({
           ...auth,
-          user: res.data.user,
-          token: res.data.token,
+          user: data.user,
+          token: data.token,
         });
-        localStorage.setItem("auth-token", JSON.stringify(res.data));
+        localStorage.setItem("auth-token", JSON.stringify(data));
         navigate("/");
       } else {
         alert("error");
