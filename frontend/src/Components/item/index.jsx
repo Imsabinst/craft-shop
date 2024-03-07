@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import "./item.css";
 
 const Item = ({ item }) => {
+  
   return (
     <div className="item">
       {item && (
-        <Link to={`/product/${item?._id}`}>
+        <Link to={`/product/${item?.id}`}>
           <img
             src={item?.image}
             alt={item?.name}

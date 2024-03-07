@@ -29,6 +29,7 @@ const Navbar = () => {
       token: "",
     });
     localStorage.removeItem("auth-token");
+    window.location.replace("/");
   };
 
   return (
@@ -98,8 +99,7 @@ const Navbar = () => {
         <Link to="/cart" style={{ textDecoration: "none" }}>
           <img src={cart_icon} alt="cart icon" />
         </Link>
-        {/*      <div className="nav-cart-count">{getTotalCartItems()}</div>
-         */}
+
         <div className="nav-cart-count">{getTotalCartItems()}</div>
       </div>
     </div>

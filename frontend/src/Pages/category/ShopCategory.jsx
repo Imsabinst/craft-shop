@@ -9,6 +9,7 @@ import "./shopcategory.css";
 
 const ShopCategory = (props) => {
   const { allProduct } = useContext(ShopContext);
+  console.log(allProduct);
 
   return (
     <div className="shop-category">
@@ -25,7 +26,7 @@ const ShopCategory = (props) => {
         {allProduct &&
           allProduct?.map((item) => {
             if (props.category === item.category) {
-              return <Item key={item._id} item={item} />;
+              return <Item key={item.id} item={item} />;
             } else {
               return null;
             }

@@ -15,6 +15,7 @@ const getDefaultCart = () => {
 const ShopContextProvider = (props) => {
   const [allProduct, setAllProduct] = useState([]);
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   const getProducts = async () => {
     try {
@@ -25,64 +26,99 @@ const ShopContextProvider = (props) => {
         setAllProduct(data?.products);
       }
     } catch (error) {
-      console.log(error);
+      throw error;
+    }
+
+    const authToken = localStorage.getItem("auth-token");
+
+    if (authToken) {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/product/getCart`,
+        {},
+        {
+          headers: {
+            Accept: "application/form-data",
+            "auth-token": authToken,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = response.data;
+      setCartItems(data);
+      console.log(data);
     }
   };
-
   useEffect(() => {
     getProducts();
   }, []);
 
-  const addToCart = (itemId) => {
+  useEffect(() => {
+    const getRelatedProducts = async () => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/getRelatedProducts`
+      );
+      if (data?.success) {
+        setRelatedProducts(data.relatedProducts);
+      }
+    };
+    getRelatedProducts();
+  }, []);
+
+  const addToCart = async (itemId) => {
     setCartItems((prevValue) => ({
       ...prevValue,
       [itemId]: prevValue[itemId] + 1,
     }));
-    if (localStorage.getItem("auth-token")) {
-      fetch(`${process.env.REACT_APP_API}/api/v1/product/addToCart`, {
-        method: "POST",
-        headers: {
-          Accept: "application/form-data",
-          "auth-token": `${localStorage.getItem("auth-token")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ itemId: itemId }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data, "d......."));
+    try {
+      const authToken = localStorage.getItem("auth-token");
+      if (authToken) {
+        const response = await axios.post(
+          `${process.env.REACT_APP_API}/api/v1/product/addToCart`,
+          { itemId: itemId },
+          {
+            headers: {
+              Accept: "application/form-data",
+              "auth-token": authToken,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = response.data;
+        localStorage.setItem("cartItems", JSON.stringify(data));
+      }
+    } catch (error) {
+      throw error;
     }
   };
 
-  useEffect(() => {
-    addToCart();
-  }, []);
-  /* const addToCart = (itemId) => {
-    setCartItems((prevValue) => ({
-      ...prevValue,
-      [itemId]: prevValue[itemId] + 1,
-    }));
-    if (localStorage.getItem("auth-token")) {
-      axios
-        .post(
-          `${process.env.REACT_APP_API}/api/v1/product/addToCart`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              token: `${localStorage.getItem("auth-token")}`,
-            },
-          },
-          { itemId: itemId }
-        )
-        .then((response) => response.data)
-        .then((res) => console.log(res, "d......."));
-    }
-  }; */
-
-  const removeCartItems = (itemId) => {
+  const removeCartItems = async (itemId) => {
     setCartItems((prevValue) => ({
       ...prevValue,
       [itemId]: prevValue[itemId] - 1,
     }));
+    if (localStorage.getItem("auth-token")) {
+      const authToken = localStorage.getItem("auth-token");
+
+      await axios
+        .post(
+          `${process.env.REACT_APP_API}/api/v1/product/removeCartData`,
+          { itemId: itemId },
+          {
+            headers: {
+              Accept: "application/form-data",
+              "auth-token": authToken,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data, "d.......");
+          localStorage.removeItem("cartItems");
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    }
   };
   const getTotalCartAmount = () => {
     let totalAmount = 0;
@@ -103,22 +139,22 @@ const ShopContextProvider = (props) => {
       if (cartItems[item] > 0) {
         totalItem += cartItems[item];
       }
-      console.log(totalItem);
     }
     return totalItem;
   };
 
-  const conextValue = {
+  const contextValue = {
     allProduct,
     cartItems,
     addToCart,
     removeCartItems,
     getTotalCartAmount,
     getTotalCartItems,
+    relatedProducts,
   };
 
   return (
-    <ShopContext.Provider value={conextValue}>
+    <ShopContext.Provider value={contextValue}>
       {props.children}
     </ShopContext.Provider>
   );
