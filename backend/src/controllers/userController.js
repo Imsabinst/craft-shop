@@ -40,7 +40,6 @@ export const registerController = async (req, res) => {
       cartData: cart,
     }).save();
 
-    console.log(user, "eee");
     res.status(201).send({
       success: true,
       message: "User Registration Success.",

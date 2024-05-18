@@ -186,12 +186,12 @@ export const getCartData = async (req, res) => {
   try {
     console.log("getCart");
     let userData = await userModel.findOne({ _id: req.userId });
-    /* res.send(200).send({
+    res.status(200).send({
       success: true,
       message: "cart data",
-      userData,
-    }); */
-    res.json(userData.cartData);
+      cart: userData.cartData,
+    });
+    //  res.json(userData.cartData);
   } catch (err) {
     throw err;
   }
