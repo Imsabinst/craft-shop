@@ -1,0 +1,10 @@
+.myTable .ant-table td,
+.myTable .ant-table th {
+  padding: 16px; /* Adjust padding */
+  font-size: 16px; /* Adjust font size */
+}
+
+.myTable {
+  width: 80%;
+  overflow-x: auto;
+}
