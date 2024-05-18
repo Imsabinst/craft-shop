@@ -32,7 +32,7 @@ const ShopContextProvider = (props) => {
     const authToken = localStorage.getItem("auth-token");
 
     if (authToken) {
-      const response = await axios.post(
+      const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/product/getCart`,
         {},
         {
@@ -43,9 +43,9 @@ const ShopContextProvider = (props) => {
           },
         }
       );
-      const data = response.data;
-      setCartItems(data);
-      console.log(data);
+      if (data?.success) {
+        setCartItems(data?.cart);
+      }
     }
   };
   useEffect(() => {
@@ -112,7 +112,7 @@ const ShopContextProvider = (props) => {
           }
         )
         .then((response) => {
-          console.log(response.data, "d.......");
+          console.log(response.data);
           localStorage.removeItem("cartItems");
         })
         .catch((error) => {

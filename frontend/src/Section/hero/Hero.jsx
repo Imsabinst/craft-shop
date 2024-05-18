@@ -1,8 +1,9 @@
 import React from "react";
 import arrow_icon from "../../Assets/arrow.png";
-import hero_icon from "../../Assets/images/khaijadi.png";
+//import hero_icon from "../../Assets/images/khaijadi.png";
 
 import "./hero.css";
+import ImageSlider from "./ImageSlider";
 
 const Hero = () => {
   return (
@@ -22,7 +23,8 @@ const Hero = () => {
         </div>
       </div>
       <div className="hero-right">
-        <img src={hero_icon} alt="" />
+        {/* <img src={hero_icon} alt="" /> */}
+        <ImageSlider />
       </div>
     </div>
   );
