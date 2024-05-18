@@ -37,28 +37,25 @@ git clone https://github.com/Imsabinst/craft-shop.git
 2. Navigate to the project directory:
 
 3. Install dependencies for both the frontend and backend:
+
 - cd admin && npm install
 - cd ../frontend && npm install
 - cd ../backend && npm install
 
 4. Set up environment variables:
+
 - backend
-PORT=5001
-MONGODB_URI=<your_mongodb_uri>
-JWT_SECRET=<your_jwt_secret>
+  PORT=5001
+  MONGODB_URI=<your_mongodb_uri>
+  JWT_SECRET=<your_jwt_secret>
 
 5. Run the development server:
-Start the backend server:
-cd backend && npm start or npm run dev 
+   Start the backend server:
+   cd backend && npm start or npm run dev
 
 Start the frontend development server:
 cd frontend && npm start
 
 6. Open your web browser and navigate to http://localhost:3000 to view the application.
 
-
-&copy;2023 Sabin. All rights reserved.
-
-
-
-
+&copy;2024 Sabin. All rights reserved.
