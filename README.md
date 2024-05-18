@@ -21,6 +21,9 @@ ADMIN:
 
 - Can add, delete product
 
+
+![Home page] home-ecraft.png
+
 ## Future work
 
 - Search products by name or category
