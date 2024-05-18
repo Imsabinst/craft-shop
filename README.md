@@ -21,8 +21,7 @@ ADMIN:
 
 - Can add, delete product
 
-
-![Home page] ./home-ecraft.png
+![home-ecraft](https://github.com/Imsabinst/craft-shop/assets/74890328/7c43fa40-6056-4753-a675-bb284815d5a3)
 
 ## Future work
 
