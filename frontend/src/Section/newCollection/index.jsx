@@ -10,7 +10,7 @@ const NewCollection = () => {
   useEffect(() => {
     const getNewCollection = async () => {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/getNewCollection`
+        `${process.env.REACT_APP_API}api/v1/product/getNewCollection`
       );
 
       if (data?.success) {

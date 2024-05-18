@@ -27,7 +27,7 @@ const LoginSignup = () => {
   const userLogin = async () => {
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/user/login`,
+        `${process.env.REACT_APP_API}api/v1/user/login`,
         formData
       );
       if (data.success) {

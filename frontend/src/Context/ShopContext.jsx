@@ -20,7 +20,7 @@ const ShopContextProvider = (props) => {
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/getProducts`
+        `${process.env.REACT_APP_API}api/v1/product/getProducts`
       );
       if (data?.success) {
         setAllProduct(data?.products);
@@ -55,7 +55,7 @@ const ShopContextProvider = (props) => {
   useEffect(() => {
     const getRelatedProducts = async () => {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/getRelatedProducts`
+        `${process.env.REACT_APP_API}api/v1/product/getRelatedProducts`
       );
       if (data?.success) {
         setRelatedProducts(data.relatedProducts);

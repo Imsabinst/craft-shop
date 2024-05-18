@@ -12,7 +12,7 @@ const Popular = () => {
   useEffect(() => {
     const getPopularProducts = async () => {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/getPopularProducts`
+        `${process.env.REACT_APP_API}api/v1/product/getPopularProducts`
       );
       if (data?.success) {
         setPopularProducts(data.popularProducts);
