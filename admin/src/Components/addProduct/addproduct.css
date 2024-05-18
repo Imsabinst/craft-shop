@@ -43,6 +43,7 @@
   border-radius: 10px;
   object-fit: contain;
   margin: 10px 0;
+  cursor: pointer;
 }
 .addproduct button {
   margin-top: 20px;

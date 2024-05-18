@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import cross_icon from "../../assets/cross_icon.png";
 import "./listProduct.css";
-import ProductListTable from "./ProductListTable";
+import ListTable from "./productlist/ListTable";
 
 const ListProduct = () => {
   const [products, setProducts] = useState([]);
-
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API}/api/v1/product/getProducts`
       );
 
-      console.log(data);
       if (data?.success) {
         setProducts(data?.products);
       }
@@ -32,6 +30,7 @@ const ListProduct = () => {
       const { data } = await axios.delete(
         `${process.env.REACT_APP_API}/api/v1/product/deleteProduct/${catId}`
       );
+
       if (data?.success) {
         alert(`Deleted`);
       }
@@ -42,10 +41,10 @@ const ListProduct = () => {
   };
   return (
     <div className="list-product">
-      <ProductListTable
+      <ListTable
         product={products}
         cross_icon={cross_icon}
-        handleDelete={handleDelete}
+        onDelete={handleDelete}
       />
     </div>
   );
