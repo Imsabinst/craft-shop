@@ -7,7 +7,8 @@ export const requireLogin = async (req, res, next) => {
   try {
     const decode = JWT.verify(
       req.headers.authorization,
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRY }
     );
 
     req.user = decode;
