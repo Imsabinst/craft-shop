@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: rgb(241, 240, 239);
   gap: 50px;
 }
 .footer-logo {

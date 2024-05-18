@@ -54,7 +54,8 @@
   width: 148px;
   height: 40px;
   outline: none;
-  border: 1px solid #7a7a7a;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #c6bfbf;
   border-radius: 75px;
   color: #515151;
   background: white;

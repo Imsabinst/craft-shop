@@ -8,8 +8,9 @@ import { ShopContext } from "../../Context/ShopContext";
 
 const ProductDisplay = (props) => {
   const { product } = props;
-  console.log(product, "ggg");
   const { addToCart } = useContext(ShopContext);
+  const category =
+    product?.category.charAt(0).toUpperCase() + product?.category.slice(1);
 
   return (
     <div className="productDisplay">
@@ -72,7 +73,8 @@ const ProductDisplay = (props) => {
           ADD TO CART
         </button>
         <p className="productDisplay-right-category">
-          <span>Category: </span>Women, T-Shirt, Crop Top
+          <span>Category: </span>
+          {category}
         </p>
         <p className="productDisplay-right-category">
           <span>Tags: </span>Mordern, Latest
