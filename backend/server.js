@@ -30,7 +30,7 @@ app.use("/api/v1/user", userRoutes);
 app.get("/", (req, res) => {
   res.send(`<h1>Welcome To craft shop. Server is running on ${PORT}</h1> !`);
 });
-
+/* 
 const storage = multer.diskStorage({
   destination: "./upload/images",
   filename: (req, file, cb) => {
@@ -54,6 +54,32 @@ app.post(
       message: "Image uploaded",
     });
   }
+); */
+
+// Set up Multer storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
+
+// Endpoint for file uploads
+app.post("/upload", upload.single("image"), (req, res) => {
+  const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${
+    req.file.filename
+  }`;
+  res.send({ imageUrl });
+});
+
+// Serve static files from the uploads directory
+app.use(
+  "/api/v1/product/images",
+  express.static(path.join(__dirname, "upload/images"))
 );
 
 const PORT = process.env.PORT || 8080;
