@@ -5,11 +5,11 @@ import star from "../images/star.png";
 let images = [
   {
     id: 1,
-    url: bowl,
+    url: khaijadi,
   },
   {
     id: 2,
-    url: khaijadi,
+    url: bowl,
   },
   {
     id: 3,

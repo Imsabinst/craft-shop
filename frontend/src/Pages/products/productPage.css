@@ -1,0 +1,107 @@
+/* productPage.css */
+.product-page {
+  padding: 10px;
+  text-align: center;
+  height: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  max-width: 1440px; /* Limit max-width */
+  margin: 0 auto; /* Center content horizontally */
+  box-sizing: border-box; /* Ensures padding is included in the element's width */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: start;
+  margin-left: 24px; /* Add some space from the left */
+  margin-right: 24px; /* Add some space from the right */
+  white-space: nowrap; /* Prevent the title from wrapping */
+  overflow: hidden; /* Hide anything that overflows */
+  text-overflow: ellipsis; /* Add ellipsis if title overflows */
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
+  gap: 24px;
+  justify-items: center;
+  margin-top: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cart-summary {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+/* Media Query for screen widths 1280px or smaller */
+@media (max-width: 1280px) {
+  .product-page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .page-title {
+    font-size: 1.8rem; /* Slightly smaller title on medium-sized screens */
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+  }
+}
+
+/* Media Query for screen widths 1024px or smaller */
+@media (max-width: 1024px) {
+  .product-page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .page-title {
+    font-size: 1.7rem; /* Slightly smaller title on smaller screens */
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for small screens */
+  }
+}
+
+/* Media Query for screen widths 800px or smaller */
+@media (max-width: 800px) {
+  .product-page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .page-title {
+    font-size: 1.6rem; /* Slightly smaller title on smaller screens */
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* 3 columns for medium-sized screens */
+  }
+}
+
+/* Media Query for screen widths 500px or smaller */
+@media (max-width: 500px) {
+  .product-page {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .page-title {
+    font-size: 1.4rem; /* Even smaller title on very small screens */
+    margin-left: 8px; /* Adjust margins for better space utilization */
+    margin-right: 8px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(1, 1fr); /* 1 column for very small screens */
+  }
+}

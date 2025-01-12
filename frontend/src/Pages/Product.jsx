@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import Breadcrum from "../Components/breadcrums/Breadcrum";
-import ProductDisplay from "../Section/productdisplay/ProductDisplay";
 import DescriptionBox from "../Components/descriptionBox/DescriptionBox";
-import RelatedProducts from "../Section/relatedProducts/RelatedProducts";
 import { ShopContext } from "../Context/ShopContext";
+import ProductDisplay from "../features/productdisplay/ProductDisplay";
+import RelatedProducts from "../features/relatedProducts/RelatedProducts";
 
 const Product = () => {
   const { allProduct } = useContext(ShopContext);
   const { productId } = useParams();
-  
 
   const product = allProduct.find((e) => e.id === Number(productId));
 

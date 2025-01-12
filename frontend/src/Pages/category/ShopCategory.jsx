@@ -9,7 +9,6 @@ import "./shopcategory.css";
 
 const ShopCategory = (props) => {
   const { allProduct } = useContext(ShopContext);
-  console.log(allProduct);
 
   return (
     <div className="shop-category">
@@ -18,9 +17,6 @@ const ShopCategory = (props) => {
         <p>
           <span>Showing 1 - 12</span> Out of 30 products
         </p>
-        <div className="shopcategory-sort">
-          Sort by <img src={dropdown_icon} alt="" />
-        </div>
       </div>
       <div className="shopcategory-products">
         {allProduct &&
