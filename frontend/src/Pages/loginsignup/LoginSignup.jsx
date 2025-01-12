@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/auth";
 
 import "./loginsignup.css";
-import { useAuth } from "../../Context/auth";
 
 const LoginSignup = () => {
   const [state, setState] = useState("Login");
@@ -27,7 +27,7 @@ const LoginSignup = () => {
   const userLogin = async () => {
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API}api/v1/user/login`,
+        `${process.env.REACT_APP_API}/api/v1/user/login`,
         formData
       );
       if (data.success) {
@@ -48,7 +48,7 @@ const LoginSignup = () => {
   const userRegistration = async () => {
     try {
       const responseData = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/user/register`,
+        `http://localhost:5001/api/v1/user/register`,
         formData
       );
 

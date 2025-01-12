@@ -1,0 +1,44 @@
+/* General Styles */
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.home-others {
+  width: 800px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px; /* Spacing between sections */
+  padding: 0 15px;
+}
+
+@media (max-width: 1280px) {
+  .home-others {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .home-others {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 800px) {
+  .home-others {
+    gap: 40px;
+  }
+  .home-hero {
+    padding: 10px; /* Adding some padding for smaller screens */
+  }
+}
+
+@media (max-width: 500px) {
+  .home-others {
+    gap: 30px;
+    padding: 0 10px; /* Tighter padding for smaller screens */
+  }
+}

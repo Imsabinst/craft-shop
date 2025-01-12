@@ -1,0 +1,103 @@
+/* ProfileDropdown Styles */
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.profile-dropdown-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.dropdown-arrow {
+  font-size: 18px;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+/* When dropdown is open, rotate the arrow */
+.profile-dropdown-icon.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-icon:hover {
+  color: #ff4141; /* Change color when hover */
+}
+
+.dropdown-link {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid #f1f1f1;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-link:hover {
+  background-color: #f9f9f9;
+}
+
+.logout-button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: teal;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #1acfcf;
+}

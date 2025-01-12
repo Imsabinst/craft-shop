@@ -9,8 +9,9 @@ const ListProduct = () => {
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/product/getProducts`
+        `http://localhost:5001/api/v1/product/getProducts`
       );
+      console.log(data);
 
       if (data?.success) {
         setProducts(data?.products);

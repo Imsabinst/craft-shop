@@ -30,16 +30,17 @@ const AddProduct = () => {
     const formData = new FormData();
     formData.append("product", image);
 
+    //process.env.REACT_APP_API
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/product/uploadImage`,
+        `${process.env.REACT_APP_API}api/v1/product/uploadImage`,
         formData
       );
       if (data.success) {
         product.image = data?.image_url;
         await axios
           .post(
-            `${process.env.REACT_APP_API}/api/v1/product/addProduct`,
+            `${process.env.REACT_APP_API}api/v1/product/addProduct`,
             product
           )
           .then((product_data) =>
