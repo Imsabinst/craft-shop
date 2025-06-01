@@ -25,17 +25,20 @@
   font-weight: 600;
 }
 
-.offers-left button {
-  width: 282px;
-  height: 70px;
-  border-radius: 35px;
+.offers-shop-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 180px;
+  height: 48px;
+  border-radius: 75px;
+  margin-top: 30px;
   background: #ff4141;
   color: white;
-  border: none;
-  margin-top: 30px;
   font-size: 22px;
   font-weight: 500;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .offers-right {

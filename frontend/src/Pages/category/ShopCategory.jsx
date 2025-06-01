@@ -4,6 +4,7 @@ import "./shopcategory.css";
 import Item from "../../Components/item";
 import { ShopContext } from "../../Context/ShopContext";
 
+import { Link } from "react-router-dom";
 import "./shopcategory.css";
 
 const ShopCategory = (props) => {
@@ -27,7 +28,9 @@ const ShopCategory = (props) => {
             }
           })}
       </div>
-      <div className="shopcategory-loadmore">Explore More</div>
+      <Link to="/products" className="shopcategory-loadmore">
+        Explore More
+      </Link>
     </div>
   );
 };
