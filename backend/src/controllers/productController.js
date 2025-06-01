@@ -1,39 +1,38 @@
 import productModel from "../models/productModel.js";
 import userModel from "../models/userModel.js";
-import jwt from "jsonwebtoken";
 
 export const addProductController = async (req, res) => {
   try {
-    let products = await productModel.find({});
-    let id;
-    if (products.length > 0) {
-      let last_item_array = products.slice(-1); //only get the last product
-      let last_item = last_item_array[0]; //can access with index 0
-      id = last_item.id + 1;
-    } else {
-      id = 1;
-    }
+    // Find last product by id descending
+    const lastProduct = await productModel.findOne().sort({ id: -1 });
+
+    // Generate new id
+    const id = lastProduct ? lastProduct.id + 1 : 1;
+
+    // Create new product instance
     const product = new productModel({
       id,
       name: req.body.name,
       image: req.body.image,
+      description: req.body.description,
+      sizes: req.body.sizes || [],
       category: req.body.category,
       new_price: req.body.new_price,
       old_price: req.body.old_price,
     });
 
     await product.save();
-    console.log(product);
+
     res.json({
       success: true,
       message: "Product created",
       product,
     });
   } catch (error) {
-    res.status(500).send({
+    res.status(500).json({
       success: false,
       message: "Error creating product",
-      error,
+      error: error.message || error,
     });
   }
 };
@@ -42,7 +41,7 @@ export const allProductsController = async (req, res) => {
   try {
     const products = await productModel
       .find({})
-      .limit(28)
+      .limit(40)
       .sort({ createdAt: -1 });
     res.status(200).send({
       success: true,
