@@ -3,6 +3,7 @@ import "./item.css";
 
 const Item = ({ item }) => {
   if (!item) return null;
+  console.log(item);
 
   return (
     <div className="item">

@@ -1,7 +1,6 @@
-import React from "react";
 import "./descriptionBox.css";
 
-const DescriptionBox = () => {
+const DescriptionBox = ({ description }) => {
   return (
     <div className="descriptionBox">
       <div className="descriptionBox-navigator">
@@ -9,12 +8,7 @@ const DescriptionBox = () => {
         <div className="descriptionBox-nav-box fade">Reviews (122)</div>
       </div>
       <div className="descriptionBox-description">
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam
-          consequatur praesentium optio debitis, esse commodi dicta provident
-          fuga velit aspernatur! Temporibus velit est quod harum excepturi
-          repellat sapiente nulla provident?
-        </p>
+        <p>{description}</p>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam
           corporis sit similique nam? Magnam rem dolorem quibusdam vero et,

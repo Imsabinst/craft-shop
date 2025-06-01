@@ -8,6 +8,7 @@ import "./product_display.css";
 
 const ProductDisplay = ({ product }) => {
   const { addToCart } = useContext(ShopContext);
+
   if (!product) return null;
 
   const category =
@@ -16,14 +17,6 @@ const ProductDisplay = ({ product }) => {
   return (
     <div className="productDisplay">
       <div className="productDisplay-left">
-        {/* Thumbnail list - Uncomment if you have multiple images */}
-        {/* {product.images && product.images.length > 1 && (
-          <div className="productDisplay-img-list">
-            {product.images.map((img, i) => (
-              <img key={i} src={img} alt={`${product.name} thumbnail ${i + 1}`} />
-            ))}
-          </div>
-        )} */}
         <div className="productDisplay-img">
           <img
             src={product.image}
@@ -50,10 +43,13 @@ const ProductDisplay = ({ product }) => {
           </div>
         </div>
         <div className="productDisplay-right-description">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae
-          dolorem eos libero delectus repellendus expedita temporibus
-          perspiciatis. Numquam, quia. Asperiores placeat ducimus maxime, rem
-          aut nihil libero non quasi nisi.
+          {product.description}
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam
+            corporis sit similique nam? Magnam rem dolorem quibusdam vero et,
+            exercitationem itaque officiis doloribus, necessitatibus est quis
+            laboriosam explicabo labore numquam?
+          </p>
         </div>
         <div className="productDisplay-right-size">
           <h1>Select Size</h1>

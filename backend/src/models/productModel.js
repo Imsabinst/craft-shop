@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
   id: {
@@ -13,9 +13,17 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   category: {
     type: String,
     required: true,
+  },
+  sizes: {
+    type: [String],
+    default: ["S", "M", "L", "XL", "XXL"],
   },
   new_price: {
     type: Number,
