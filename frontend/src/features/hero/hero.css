@@ -120,6 +120,7 @@
     height: 50px;
     margin-top: 20px;
     font-size: 18px;
+    text-decoration: none;
   }
   .hero-right img {
     width: 300px;

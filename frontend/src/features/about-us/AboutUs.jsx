@@ -1,6 +1,4 @@
-import React from "react";
 import "./aboutUs.css";
-import CategoryMenu from "../../Components/category-menu/CategoryMenu";
 
 const AboutUs = () => {
   return (
@@ -25,7 +23,6 @@ const AboutUs = () => {
       </div>
       <div className="category">
         <h2>Checkout our products</h2>
-        <CategoryMenu />
       </div>
     </div>
   );

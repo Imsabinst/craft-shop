@@ -1,8 +1,8 @@
 // src/Pages/ProductPage.jsx
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
+import Item from "../../Components/item";
 import { ShopContext } from "../../Context/ShopContext";
 import "./productPage.css";
-import Item from "../../Components/item";
 
 const ProductPage = () => {
   const { allProduct } = useContext(ShopContext);

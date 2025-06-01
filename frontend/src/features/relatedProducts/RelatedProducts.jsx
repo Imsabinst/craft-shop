@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
-import "./relatedProducts.css";
 import Item from "../../Components/item";
 import { ShopContext } from "../../Context/ShopContext";
+import "./relatedProducts.css";
 
 const RelatedProducts = () => {
   const { relatedProducts } = useContext(ShopContext);
