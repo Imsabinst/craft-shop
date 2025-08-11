@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
 import images from "../../Assets/images/imageData";
 import "./imageSlider.css";
 
@@ -35,30 +37,41 @@ const ImageSlider = () => {
   }
 
   return (
-    <div className="slider-container" role="region" aria-label="Image Slider">
-      <button
-        className="prev-button"
-        onClick={prevSlide}
-        aria-label="Previous Slide"
-        type="button"
-      >
-        &#8249;
-      </button>
+    <div className="slider" role="region" aria-label="Image Slider">
+      <figure className="slider__figure">
+        <img
+          src={images[currentImageIndex].url}
+          alt={
+            images[currentImageIndex].alt ||
+            `Slide ${currentImageIndex + 1} of ${images.length}`
+          }
+          className="slider__image"
+        />
+        {images[currentImageIndex].caption && (
+          <figcaption className="slider__caption">
+            {images[currentImageIndex].caption}
+          </figcaption>
+        )}
+      </figure>
 
-      <img
-        src={images[currentImageIndex].url}
-        alt={images[currentImageIndex].alt || `Slide ${currentImageIndex + 1}`}
-        className="slider-image"
-      />
-
-      <button
-        className="next-button"
-        onClick={nextSlide}
-        aria-label="Next Slide"
-        type="button"
-      >
-        &#8250;
-      </button>
+      <div className="slider__controls">
+        <button
+          className="slider__button"
+          onClick={prevSlide}
+          aria-label="Previous slide"
+          type="button"
+        >
+          <FiChevronLeft aria-hidden="true" size={24} />
+        </button>
+        <button
+          className="slider__button"
+          onClick={nextSlide}
+          aria-label="Next slide"
+          type="button"
+        >
+          <FiChevronRight aria-hidden="true" size={24} />
+        </button>
+      </div>
     </div>
   );
 };
